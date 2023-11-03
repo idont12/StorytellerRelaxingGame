@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7881076238643088266}
   m_Layer: 5
   m_Name: DraggingElement
-  m_TagString: Untagged
+  m_TagString: OnDrag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,3 +140,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
   dropObject: {fileID: 0}
+  objectType: 
+  objectID: 0
+  isStageCharacter: 0
+  characterInSlide: 0
+  slideObject: {fileID: 0}

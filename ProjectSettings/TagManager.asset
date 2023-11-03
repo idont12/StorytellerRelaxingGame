@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SlideCollider
   - CharacterSlotCollider
+  - OnDrag
   layers:
   - Default
   - TransparentFX

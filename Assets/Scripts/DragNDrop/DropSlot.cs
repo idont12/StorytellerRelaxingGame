@@ -11,6 +11,7 @@ public class DropSlot : MonoBehaviour
     public GameObject objectInSlot;
     public BackgroundManager backgroundManager;
     public int SlotPlace;
+    public Animator CharacterArrow;
 
     public void UpdateSlot(GameObject newObject, int objectID)
     {
@@ -69,15 +70,6 @@ public class DropSlot : MonoBehaviour
             }
 
         }
-
-        //if (objectInSlot.GetComponent<CharacterLogic>().enabled == false)
-        //{
-        //    objectInSlot.GetComponent<CharacterLogic>().enabled = true;
-        //}
-        //if (objectInSlot.GetComponent<UnityEngine.UI.Image>().enabled == false)
-        //{
-        //    objectInSlot .GetComponent<UnityEngine.UI.Image>().enabled = true;
-        //}
     }
 
     void updateBackground(GameObject newObject)
