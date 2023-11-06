@@ -18,7 +18,9 @@ public class DragGeneral : MonoBehaviour
     public bool isStageCharacter;
     public int characterInSlide;
     public GameObject slideObject;
+    public int OriginalSlotId;
 
+    UiCollider uiCollider = new UiCollider();
     private void Start()
     {
         RectTransform = GetComponent<RectTransform>();
@@ -30,6 +32,7 @@ public class DragGeneral : MonoBehaviour
         else if (objectType == "Character")
         {
             CollitionType = "CharacterSlotCollider";
+            gameObject.tag = "OnDragCharacter";
         }
     }
     private void FixedUpdate()
@@ -40,7 +43,7 @@ public class DragGeneral : MonoBehaviour
         }
         else
         {
-            GameObject CollitionWith = ChackCollider(CollitionType, gameObject.GetComponent<RectTransform>());
+            GameObject CollitionWith = uiCollider.ChackCollider(CollitionType, gameObject.GetComponent<RectTransform>());
 
             if (CollitionWith!=null)
             {
@@ -51,7 +54,8 @@ public class DragGeneral : MonoBehaviour
             {
                 try
                 {
-                    if (CollitionWith.GetComponent<DropSlot>().objectInSlot != null && CollitionWith.GetComponent<DropSlot>().objectInSlot.GetComponent<CharacterLogic>().ID == objectID && CollitionWith.transform.parent == slideObject)
+                    /*תנאי שאומר מספר דברים הראשון, תבדוק שקיים אובייקט בקוליידר בו התנגשנו אחר כך שסוג הדמות זו אותה דמות שאנחנו גוררים ולבסוף שהסלייד זה אותו סלייד ממנו לקחנו את האובייקט*/
+                    if (CollitionWith.GetComponent<DropSlot>().objectInSlot != null && CollitionWith.GetComponent<DropSlot>().objectInSlot.GetComponent<CharacterLogic>().ID == objectID && CollitionWith.transform.parent.parent.parent.Find("Collider").GetComponent<DropSlot>().SlotPlace == OriginalSlotId)
                     {
                         GameObject objectInSlot = CollitionWith.GetComponent<DropSlot>().objectInSlot;
                         Color originalColor = objectInSlot.GetComponent<UnityEngine.UI.Image>().color;
@@ -69,49 +73,50 @@ public class DragGeneral : MonoBehaviour
 
             }
             Destroy(gameObject);
+            
         }
     }
     
-    bool isRectOverlap (RectTransform rect1, RectTransform rect2)
-    {
-        Rect newRect1 = RectTransformToScreenSpace(rect1);
-        Rect newRect2 = RectTransformToScreenSpace(rect2);
-        return newRect1.Overlaps(newRect2);
-    } 
+    //bool isRectOverlap (RectTransform rect1, RectTransform rect2)
+    //{
+    //    Rect newRect1 = RectTransformToScreenSpace(rect1);
+    //    Rect newRect2 = RectTransformToScreenSpace(rect2);
+    //    return newRect1.Overlaps(newRect2);
+    //} 
 
-    Rect RectTransformToScreenSpace(RectTransform rectTransform)
-    {
-        Vector3[] corners = new Vector3[4];
-        rectTransform.GetWorldCorners(corners);
+    //Rect RectTransformToScreenSpace(RectTransform rectTransform)
+    //{
+    //    Vector3[] corners = new Vector3[4];
+    //    rectTransform.GetWorldCorners(corners);
 
-        float minX = float.MaxValue;
-        float maxX = float.MinValue;
-        float minY = float.MaxValue;
-        float maxY = float.MinValue;
+    //    float minX = float.MaxValue;
+    //    float maxX = float.MinValue;
+    //    float minY = float.MaxValue;
+    //    float maxY = float.MinValue;
 
-        for (int i = 0; i < 4; i++)
-        {
-            minX = Mathf.Min(minX, corners[i].x);
-            maxX = Mathf.Max(maxX, corners[i].x);
-            minY = Mathf.Min(minY, corners[i].y);
-            maxY = Mathf.Max(maxY, corners[i].y);
-        }
+    //    for (int i = 0; i < 4; i++)
+    //    {
+    //        minX = Mathf.Min(minX, corners[i].x);
+    //        maxX = Mathf.Max(maxX, corners[i].x);
+    //        minY = Mathf.Min(minY, corners[i].y);
+    //        maxY = Mathf.Max(maxY, corners[i].y);
+    //    }
 
-        return new Rect(minX, minY, maxX - minX, maxY - minY);
-    }
+    //    return new Rect(minX, minY, maxX - minX, maxY - minY);
+    //}
 
-    GameObject ChackCollider(string TagCollider, RectTransform collisionZoon)
-    {
-        GameObject[] AllColliders = GameObject.FindGameObjectsWithTag(TagCollider);
-        foreach (GameObject collider in AllColliders)
-        {
-            if (isRectOverlap(collisionZoon, collider.GetComponent<RectTransform>()))
-            {
-                return collider;
-            }
-        }
-        return null;
-    }
+    //GameObject ChackCollider(string TagCollider, RectTransform collisionZoon)
+    //{
+    //    GameObject[] AllColliders = GameObject.FindGameObjectsWithTag(TagCollider);
+    //    foreach (GameObject collider in AllColliders)
+    //    {
+    //        if (isRectOverlap(collisionZoon, collider.GetComponent<RectTransform>()))
+    //        {
+    //            return collider;
+    //        }
+    //    }
+    //    return null;
+    //}
 }
 
 public class UiCollider

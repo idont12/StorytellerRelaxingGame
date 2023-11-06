@@ -7,9 +7,4 @@ using UnityEngine.UIElements;
 public class CharacterLogic : MonoBehaviour
 {
     public int ID;
-
-    void Update()
-    {
-
-    }
 }

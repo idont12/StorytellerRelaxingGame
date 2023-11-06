@@ -11,7 +11,7 @@ public class ItemCanDrag : MonoBehaviour, IPointerDownHandler
     enum ObjectType { Background, Character }
     [SerializeField] ObjectType objectType;
     [SerializeField] Sprite DragItemSprite;
-    [SerializeField] int objectID;
+    public int objectID;
     public Canvas canvas;
     [SerializeField] GameObject dragObject;
     [SerializeField] GameObject dropObject;
@@ -34,7 +34,7 @@ public class ItemCanDrag : MonoBehaviour, IPointerDownHandler
             Color originalColor = gameObject.GetComponent<UnityEngine.UI.Image>().color;
             gameObject.GetComponent<UnityEngine.UI.Image>().color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.5f);
         }
-        print("PressDown");
+
         GameObject newDrag = Instantiate(dragObject, transform.position, Quaternion.identity, canvas.gameObject.transform);
         newDrag.GetComponent<UnityEngine.UI.Image>().sprite = DragItemSprite;
         newDrag.GetComponent<DragGeneral>().dropObject = dropObject;
@@ -45,11 +45,12 @@ public class ItemCanDrag : MonoBehaviour, IPointerDownHandler
             newDrag.GetComponent<DragGeneral>().isStageCharacter = isStageCharacter;
             newDrag.GetComponent<DragGeneral>().slideObject = slideObject;
             newDrag.GetComponent<DragGeneral>().characterInSlide = slideObject.GetComponent<BackgroundManager>().objectInSlotList.IndexOf(gameObject);
+            newDrag.GetComponent<DragGeneral>().OriginalSlotId = slideObject.transform.parent.parent.Find("Collider").GetComponent<DropSlot>().SlotPlace;
         }
     }
 
-    public void changeMouseOver(bool newState)
-    {
-        isMouseOver=newState;
-    }
+    //public void changeMouseOver(bool newState)
+    //{
+    //    isMouseOver=newState;
+    //}
 }

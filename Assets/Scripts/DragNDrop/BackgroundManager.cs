@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BackgroundManager : MonoBehaviour
 {
-    [SerializeField] List<DropSlot> Colliders = new List<DropSlot>();
+    public List<DropSlot> Colliders = new List<DropSlot>();
     public List<GameObject> objectInSlotList = new List<GameObject>();
     UiCollider colliderFuncs = new UiCollider();
-
+    LevelManagerCode levelManagerCode;
     private void Awake()
     {
         for (int i = 0; i < Colliders.Count; i++)
@@ -17,11 +17,13 @@ public class BackgroundManager : MonoBehaviour
         }
 
     }
-
+    private void Start()
+    {
+        levelManagerCode = GameObject.Find("LevelManager").GetComponent<LevelManagerCode>();
+    }
     private void FixedUpdate()
     {
-        GameObject CollitionWith = colliderFuncs.ChackCollider("OnDrag", gameObject.GetComponent<RectTransform>());
-        print(CollitionWith != null);
+        GameObject CollitionWith = colliderFuncs.ChackCollider("OnDragCharacter", gameObject.GetComponent<RectTransform>());
         DragCharacterOverBackground(CollitionWith != null);
     }
 
@@ -54,6 +56,7 @@ public class BackgroundManager : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         Destroy(ObjectToRemove);
         ObjectToRemove = null;
+        levelManagerCode.ChackStoryInDelay();
     }
 
     public void DragCharacterOverBackground(bool arrowMode)
