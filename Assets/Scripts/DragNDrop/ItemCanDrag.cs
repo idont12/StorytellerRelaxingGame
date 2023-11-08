@@ -8,33 +8,62 @@ using UnityEngine.UIElements;
 
 public class ItemCanDrag : MonoBehaviour, IPointerDownHandler
 {
-    enum ObjectType { Background, Character }
+    [SerializeField] ItemInfo ItemInfo;
+
+    void UpdateByItemInfo(ItemInfo item)
+    {
+        objectType = item.objectType;
+        DragItemSprite = item.DragItemSprite;
+        objectID = item.objectID;
+        dragObject = item.dragObject;
+        dropObject = item.dropObject;
+        isStageCharacter = item.isStageCharacter;
+        GrabSound = item.GrabSound;
+    }
+
+    //enum ObjectType { Background, Character }
     [SerializeField] ObjectType objectType;
     [SerializeField] Sprite DragItemSprite;
+    //[HideInInspector]
     public int objectID;
+    //[HideInInspector]
     public Canvas canvas;
     [SerializeField] GameObject dragObject;
     [SerializeField] GameObject dropObject;
     [SerializeField] bool isStageCharacter = false;
     public GameObject slideObject;
+
+    [SerializeField] GameEvent GrabSound;
+    [HideInInspector]
     public bool isMouseOver = false;
 
     private void Start()
     {
-        if (DragItemSprite == null)
+        if (ItemInfo!=null)
         {
-            DragItemSprite = GetComponent<UnityEngine.UI.Image>().sprite;
+            UpdateByItemInfo(ItemInfo);
+ 
+        }
+
+        if (DragItemSprite != null && isStageCharacter==false)
+        {
+            GetComponent<UnityEngine.UI.Image>().sprite = DragItemSprite;
+        }
+        if (canvas==null)
+        {
+            canvas = GameObject.Find("GameCanvas").GetComponent<Canvas>();
         }
     }
 
+
     public void OnPointerDown(PointerEventData eventData)
     {
+        GrabSound.Raise();
         if (isStageCharacter)
         {
             Color originalColor = gameObject.GetComponent<UnityEngine.UI.Image>().color;
             gameObject.GetComponent<UnityEngine.UI.Image>().color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.5f);
         }
-
         GameObject newDrag = Instantiate(dragObject, transform.position, Quaternion.identity, canvas.gameObject.transform);
         newDrag.GetComponent<UnityEngine.UI.Image>().sprite = DragItemSprite;
         newDrag.GetComponent<DragGeneral>().dropObject = dropObject;

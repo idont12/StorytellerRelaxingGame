@@ -44,7 +44,6 @@ public class DragGeneral : MonoBehaviour
         else
         {
             GameObject CollitionWith = uiCollider.ChackCollider(CollitionType, gameObject.GetComponent<RectTransform>());
-
             if (CollitionWith!=null)
             {
                 CollitionWith.GetComponent<DropSlot>().UpdateSlot(dropObject, objectID);

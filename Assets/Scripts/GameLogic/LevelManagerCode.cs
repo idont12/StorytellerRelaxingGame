@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using static CharacterStatus;
@@ -15,9 +16,94 @@ public class LevelManagerCode : MonoBehaviour
     [SerializeField] List<Condition> Defult = new List<Condition>();
     [SerializeField] List<Condition> conditions = new List<Condition>();
     [SerializeField] Animator IconFinalLevel;
+    [SerializeField] GameEvent FinalLevelSound;
+
+    //[SerializeField] ItemInfo ItemInfo;
+    bool isFewFirstCh(string word, int characterNum, string eqealTo)
+    {
+        return word.ToString().Substring(0, characterNum) == eqealTo;
+    }
+
     private void Start()
     {
+        ItemInfo TestItem = ScriptableObject.CreateInstance<ItemInfo>();
 
+        foreach (Condition condition in conditions)
+        {
+            if (condition.isSituation)
+            {
+                foreach (ObjectName thisObject in condition.SituationElement)
+                {
+                    int objectId = TestItem.ObjectToID(thisObject);
+                    if (isFewFirstCh(thisObject.ToString(), 2, "Bg"))
+                    {
+                        if (condition.BackgroundsIDs.Contains(objectId) == false)
+                        {
+                            condition.BackgroundsIDs.Add(objectId);
+                        }
+                    }
+                    else if (isFewFirstCh(thisObject.ToString(), 2, "Ch"))
+                    {
+                        if (condition.CharactersIDs.Contains(objectId) == false)
+                        {
+                            condition.CharactersIDs.Add(objectId);
+                        }
+                    }
+                }
+            }
+            if (condition.isCharacterStatus)
+            {
+                foreach (CharacterStatus state in condition.conditionsStatus)
+                {
+                    int MainID = TestItem.ObjectToID(state.mainObject);
+                    if (state.mainCharacteID == 0)
+                    {
+                        state.mainCharacteID = MainID;
+                    }
+                    int SecenderyID = TestItem.ObjectToID(state.secondaryObject);
+                    if (state.secondaryCharacterID == 0)
+                    {
+                        state.secondaryCharacterID = SecenderyID;
+                    }
+                }
+            }
+            if (condition.willChangeAnimation)
+            {
+                foreach (ChangeAnimation Animation in condition.ChangeAnimations)
+                {
+                    int animationId = TestItem.ObjectToID(Animation.Character);
+                    if (isFewFirstCh(Animation.Character.ToString(), 2, "Ch") && Animation.CharacterID==0)
+                    {
+                        Animation.CharacterID = animationId;
+                    }
+                }
+            }
+            if (condition.willChangeCharacterStatus)
+            {
+                foreach (CharacterStatus state in condition.Change_characterFirendStatus)
+                {
+                    int MainID = TestItem.ObjectToID(state.mainObject);
+                    if (state.mainCharacteID == 0)
+                    {
+                        state.mainCharacteID = MainID;
+                    }
+                    int SecenderyID = TestItem.ObjectToID(state.secondaryObject);
+                    if (state.secondaryCharacterID == 0)
+                    {
+                        state.secondaryCharacterID = SecenderyID;
+                    }
+                }
+            }
+            //if (condition.)
+            //{
+
+            //}
+            
+        }
+        for(int i=0; i< SliderOrder.Count;i++)
+        {
+            SliderOrder[i].SlotPlace = i;
+        }
     }
 
     IEnumerator WaitToStartSotory()
@@ -139,6 +225,10 @@ public class LevelManagerCode : MonoBehaviour
                             print("EnterApplyStatus");
                             CharactersStatusTraker =  condition.ApplyChangeStatus(CharactersStatusTraker);
                         }
+                        if (condition.willCallEvent)
+                        {
+                            condition.Event.Raise();
+                        }
                         if (condition.WillHelpFinishLevel)
                         {
                             print("FinishLevelnow: " + ProgressFinishLevel.ToString() + " Goal: " + FinishLevelGoal.ToString());
@@ -157,6 +247,7 @@ public class LevelManagerCode : MonoBehaviour
     public void FinishLevel()
     {
         print("FinishLevel");
+        FinalLevelSound.Raise();
         if (IconFinalLevel!=null)
         {
             IconFinalLevel.SetBool("End", true);
@@ -166,7 +257,6 @@ public class LevelManagerCode : MonoBehaviour
     [System.Serializable]
     public class Condition
     {
-        
         public string conditionName;
         public int ID;
 
@@ -199,6 +289,7 @@ public class LevelManagerCode : MonoBehaviour
         [Header("---Couse---")]
         [Header("Chack Situation")]
         public bool isSituation;
+        public List<ObjectName> SituationElement = new List<ObjectName>();
         public List<int> BackgroundsIDs = new List<int>();
         public bool isCharacterAddition = false;
         public List<int> CharactersIDs = new List<int>();
@@ -310,13 +401,7 @@ public class LevelManagerCode : MonoBehaviour
         [Header("---Effect---")]
         [Header("Change Animation")]
         public bool willChangeAnimation;
-        [System.Serializable]
-        public class ChangeAnimation
-        {
-            public int CharacterID;
-            public string AnimationName = "Animation";
-            public int AnimationNum;
-        }
+
         public List<ChangeAnimation> ChangeAnimations = new List<ChangeAnimation>();
         public void ApplyChangeAnimation(List<int> charactersIDS, List<GameObject> charactersObjects)
         {
@@ -386,15 +471,31 @@ public class LevelManagerCode : MonoBehaviour
             return allCharcters;
         }
 
+        [Header("Play Event")]
+        public bool willCallEvent = false;
+        public GameEvent Event;
+
         [Header("WillHelpFinishLevel")]
         public bool WillHelpFinishLevel = false;
     }
 }
+
+[System.Serializable]
+public class ChangeAnimation
+{
+    public ObjectName Character;
+    public int CharacterID;
+    public string AnimationName = "Animation";
+    public int AnimationNum;
+}
+
 [System.Serializable]
 public class CharacterStatus
 {
     public enum RelationshipType { Friendship,NeedHelp, Scared };
     public RelationshipType relationshipType = new RelationshipType();
+    public ObjectName mainObject;
+    public ObjectName secondaryObject;
     public int mainCharacteID;
     public int secondaryCharacterID;
     public bool isHappand = true;
@@ -407,6 +508,8 @@ public class MainCharcter
 }
 
 public enum Character { Alligator, Bear, Giraffe, Hedgehog, Panda, Rhinoceros }
+
+public enum ObjectType { Background, Character }
 
 //public class CharacterStangeInfo
 //{

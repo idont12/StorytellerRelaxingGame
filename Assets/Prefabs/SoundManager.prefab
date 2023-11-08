@@ -304,8 +304,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exampleEvent: {fileID: 11400000, guid: 2938ff741298bc14da447556edee8692, type: 2}
+  Grab: {fileID: 11400000, guid: f8651b77fbe1f7747970c4874a09c71b, type: 2}
+  FinishLevel: {fileID: 11400000, guid: e78ed88d6c749bb4089001a60da72ebf, type: 2}
   exampleClipsList:
   - {fileID: 8300000, guid: 739a7fbc50d889245add459a9fed94d0, type: 3}
+  GrabSound: {fileID: 8300000, guid: 67f0dfe780fce1c4384324071013c7dd, type: 3}
+  FinishLevelSound: {fileID: 8300000, guid: 98d315eea0784204fa9363d42bc88ecb, type: 3}
   exampleSource: {fileID: 7541052095788779244}
 --- !u!1 &8542336711522576364
 GameObject:
@@ -323,7 +327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2933498603544405731
 Transform:
   m_ObjectHideFlags: 0

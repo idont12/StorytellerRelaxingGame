@@ -74,20 +74,15 @@ public class DropSlot : MonoBehaviour
                 StartCoroutine(waitToRemoveCharacter(getAnimationTime(objectInSlot, "Exit"), objectInSlot));
             }
         }
-
-
-        Vector3 newDropPosition = new Vector3(objectPosition.position.x, objectPosition.position.y, objectPosition.position.z - 0.1f);
+        Vector3 newDropPosition = new Vector3(objectPosition.position.x, objectPosition.position.y + (newObject.GetComponent<RectTransform>().sizeDelta.y / 2), objectPosition.position.z - 0.1f);
         objectInSlot = Instantiate(newObject, newDropPosition, Quaternion.identity, objectPosition);
         objectInSlot.GetComponent<ItemCanDrag>().canvas = GameObject.Find("GameCanvas").GetComponent<Canvas>();
         objectInSlot.GetComponent<ItemCanDrag>().slideObject = backgroundManager.gameObject;
-
         Color originalColor = objectInSlot.GetComponent<UnityEngine.UI.Image>().color;
         objectInSlot.GetComponent<UnityEngine.UI.Image>().color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
 
-
         backgroundManager.objectInSlotList[SlotPlace] = objectInSlot;
         ObjectSlotID = objectID;
-
         if (backgroundManager.objectInSlotList.Count > 1)
         {
             int i = 0;
@@ -95,7 +90,6 @@ public class DropSlot : MonoBehaviour
             {
                 i = 1;
             }
-
             GameObject otherSlot = backgroundManager.objectInSlotList[i];
             if (otherSlot != null)
             {
@@ -106,7 +100,6 @@ public class DropSlot : MonoBehaviour
             }
 
         }
-
         levelManagerCode.ChackStory();
     }
 

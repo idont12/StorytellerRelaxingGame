@@ -97,4 +97,5 @@ MonoBehaviour:
   dropObject: {fileID: 0}
   isStageCharacter: 0
   slideObject: {fileID: 0}
+  GrabSound: {fileID: 11400000, guid: f8651b77fbe1f7747970c4874a09c71b, type: 2}
   isMouseOver: 0

@@ -65,7 +65,6 @@ public class DragSlide : MonoBehaviour, IPointerDownHandler,IBeginDragHandler,IE
         RuntimeAnimatorController ac = anim.runtimeAnimatorController;	//Get Animator controller
         for (int i = 0; i < ac.animationClips.Length; i++)                 //For all animations
         {
-            print(ac.animationClips[i].name);
             if (ac.animationClips[i].name == AnimationName)            //If it has the same name as your clip
             {
                 time = ac.animationClips[i].length;
