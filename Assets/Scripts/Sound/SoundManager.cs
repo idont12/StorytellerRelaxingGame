@@ -16,6 +16,39 @@ public class SoundManager : MonoBehaviour
         exampleEvent.RegisterListener(OnExampleEvent);
         Grab.RegisterListener(PlayGrabSound);
         FinishLevel.RegisterListener(PlayFinishLevel);
+        DontDestroyOnLoad(transform.gameObject);
+    }
+
+    private GameObject[] music;
+
+    void Start()
+    {
+        music = GameObject.FindGameObjectsWithTag("GameMusic");
+        if (music.Length>1)
+        {
+            for (int i = 1; i < music.Length; i++)
+            {
+                if (music[i] != this)
+                {
+                    exampleEvent.UnregisterListener(OnExampleEvent);
+                    Grab.UnregisterListener(PlayGrabSound);
+                    FinishLevel.UnregisterListener(PlayFinishLevel);
+                    Destroy(music[i]);
+                }
+            }
+        }
+
+
+
+    }
+
+    private void Update()
+    {
+        if (exampleSource == null)
+        {
+            print("Exist" + exampleSource != null);
+            exampleSource = gameObject.transform.Find("ExampleAudioSource").GetComponent<AudioSource>();
+        }
     }
 
     private void OnDestroy()
@@ -36,6 +69,7 @@ public class SoundManager : MonoBehaviour
 
     private void PlayGrabSound()
     {
+        print("exampleSource" + exampleSource.gameObject.name);
         playSoundEffect(GrabSound, exampleSource);
     }
 

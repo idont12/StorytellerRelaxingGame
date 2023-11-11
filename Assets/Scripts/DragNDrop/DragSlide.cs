@@ -33,6 +33,11 @@ public class DragSlide : MonoBehaviour, IPointerDownHandler,IBeginDragHandler,IE
                 }
             }
         }
+        GameObject OnDragCharacterObject = GameObject.FindWithTag("OnDragCharacter");
+        if (OnDragCharacterObject != null)
+        {
+            return;
+        }
         rectTransform.SetParent(canvas.gameObject.transform);
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }

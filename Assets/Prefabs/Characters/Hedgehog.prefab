@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8316844961149034819}
   m_Layer: 5
   m_Name: Hedgehog
-  m_TagString: Untagged
+  m_TagString: CanDrag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6784314, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.2224505, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28385a91cf033db4cac463260e4b5fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ItemInfo: {fileID: 11400000, guid: 5f2ab8d2f6aa5a248be810bb9e8e977f, type: 2}
   objectType: 1
   DragItemSprite: {fileID: 0}
   objectID: 11

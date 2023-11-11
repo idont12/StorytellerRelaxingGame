@@ -7,6 +7,9 @@ TagManager:
   - SlideCollider
   - CharacterSlotCollider
   - OnDragCharacter
+  - CanDrag
+  - Mouse
+  - GameMusic
   layers:
   - Default
   - TransparentFX

@@ -27,7 +27,74 @@ public class LevelManagerCode : MonoBehaviour
     private void Start()
     {
         ItemInfo TestItem = ScriptableObject.CreateInstance<ItemInfo>();
+        foreach (Condition condition in Defult)
+        {
+            //if (condition.isSituation)
+            //{
+            //    foreach (ObjectName thisObject in condition.SituationElement)
+            //    {
+            //        int objectId = TestItem.ObjectToID(thisObject);
+            //        if (isFewFirstCh(thisObject.ToString(), 2, "Bg"))
+            //        {
+            //            if (condition.BackgroundsIDs.Contains(objectId) == false)
+            //            {
+            //                condition.BackgroundsIDs.Add(objectId);
+            //            }
+            //        }
+            //        else if (isFewFirstCh(thisObject.ToString(), 2, "Ch"))
+            //        {
+            //            if (condition.CharactersIDs.Contains(objectId) == false)
+            //            {
+            //                condition.CharactersIDs.Add(objectId);
+            //            }
+            //        }
+            //    }
+            //}
+            //if (condition.isCharacterStatus)
+            //{
+            //    foreach (CharacterStatus state in condition.conditionsStatus)
+            //    {
+            //        int MainID = TestItem.ObjectToID(state.mainObject);
+            //        if (state.mainCharacteID == 0)
+            //        {
+            //            state.mainCharacteID = MainID;
+            //        }
+            //        int SecenderyID = TestItem.ObjectToID(state.secondaryObject);
+            //        if (state.secondaryCharacterID == 0)
+            //        {
+            //            state.secondaryCharacterID = SecenderyID;
+            //        }
+            //    }
+            //}
+            if (condition.willChangeAnimation)
+            {
+                foreach (ChangeAnimation Animation in condition.ChangeAnimations)
+                {
+                    int animationId = TestItem.ObjectToID(Animation.Character);
+                    if (isFewFirstCh(Animation.Character.ToString(), 2, "Ch") && Animation.CharacterID == 0)
+                    {
+                        Animation.CharacterID = animationId;
+                    }
+                }
+            }
+            if (condition.willChangeCharacterStatus)
+            {
+                foreach (CharacterStatus state in condition.Change_characterFirendStatus)
+                {
+                    int MainID = TestItem.ObjectToID(state.mainObject);
+                    if (state.mainCharacteID == 0)
+                    {
+                        state.mainCharacteID = MainID;
+                    }
+                    int SecenderyID = TestItem.ObjectToID(state.secondaryObject);
+                    if (state.secondaryCharacterID == 0)
+                    {
+                        state.secondaryCharacterID = SecenderyID;
+                    }
+                }
+            }
 
+        }
         foreach (Condition condition in conditions)
         {
             if (condition.isSituation)
@@ -149,6 +216,7 @@ public class LevelManagerCode : MonoBehaviour
 
                 int FinishLevelGoal = 0;
                 int ProgressFinishLevel = 0;
+                bool FinishChack = false;
 
                 //foreach (GameObject thisObject in slide.backgroundManager.objectInSlotList)
                 //{
@@ -235,9 +303,14 @@ public class LevelManagerCode : MonoBehaviour
                             ProgressFinishLevel++;
                             if (ProgressFinishLevel == FinishLevelGoal)
                             {
+                                FinishChack = true;
                                 FinishLevel();
                             }
                         }
+                    }
+                    if (IconFinalLevel.GetBool("Solve") && FinishChack==false)
+                    {
+                        UnfinishLevel();
                     }
                 }
             }
@@ -250,7 +323,15 @@ public class LevelManagerCode : MonoBehaviour
         FinalLevelSound.Raise();
         if (IconFinalLevel!=null)
         {
-            IconFinalLevel.SetBool("End", true);
+            IconFinalLevel.SetBool("Solve", true);
+        }
+    }
+    public void UnfinishLevel()
+    {
+        print("unfinishLevel");
+        if (IconFinalLevel != null)
+        {
+            IconFinalLevel.SetBool("Solve", false);
         }
     }
 
@@ -276,7 +357,12 @@ public class LevelManagerCode : MonoBehaviour
         {
             for (int i=0;i< characterStatuses.Count; i++)
             {
-                if (characterStatuses[i].secondaryCharacterID == newState.secondaryCharacterID && characterStatuses[i].relationshipType == newState.relationshipType)
+                bool needSecenderyCharacter = true;
+                if (newState.relationshipType == RelationshipType.Friendship)
+                {
+                    needSecenderyCharacter = characterStatuses[i].secondaryCharacterID == newState.secondaryCharacterID; ;
+                }
+                if (needSecenderyCharacter && characterStatuses[i].relationshipType == newState.relationshipType)
                 {
                     return i;
                 }
@@ -437,6 +523,7 @@ public class LevelManagerCode : MonoBehaviour
                     if (newStatus.relationshipType == RelationshipType.Friendship)
                     {
                         int releventStatePlace = GetRelevantStatePlace(allCharcters[characterPlaceInList].mySituations, newStatus);
+                        print("releventStatePlace1" + releventStatePlace.ToString());
                         if (releventStatePlace == -1)
                         {
                             CharacterStatus newLine = new CharacterStatus();
@@ -453,6 +540,7 @@ public class LevelManagerCode : MonoBehaviour
                     else if (newStatus.relationshipType == RelationshipType.NeedHelp || newStatus.relationshipType == RelationshipType.Scared)
                     {
                         int releventStatePlace = GetRelevantStatePlace(allCharcters[characterPlaceInList].mySituations, newStatus);
+                        print("releventStatePlace2" + releventStatePlace.ToString());
                         if (releventStatePlace == -1)
                         {
                             CharacterStatus newLine = new CharacterStatus();

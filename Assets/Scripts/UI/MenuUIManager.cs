@@ -18,6 +18,6 @@ public class MenuUIManager : MonoBehaviour
 
     private void OnPlayButtonClicked()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("TempletScene");
     }
 }

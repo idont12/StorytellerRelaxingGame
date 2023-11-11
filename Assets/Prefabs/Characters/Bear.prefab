@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8316844961149034819}
   m_Layer: 5
   m_Name: Bear
-  m_TagString: Untagged
+  m_TagString: CanDrag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,9 +105,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28385a91cf033db4cac463260e4b5fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemInfo: {fileID: 0}
+  ItemInfo: {fileID: 11400000, guid: 3503c962cef44b0408ce034851e9f327, type: 2}
   objectType: 1
-  DragItemSprite: {fileID: 0}
+  DragItemSprite: {fileID: 21300000, guid: f97be4b1b02e61046bf526204f1e3ceb, type: 3}
   objectID: 12
   canvas: {fileID: 0}
   dragObject: {fileID: 7881076238643088264, guid: 2508bd275c7fb384ca8bb091120919d5, type: 3}

@@ -44,21 +44,21 @@ public class DragGeneral : MonoBehaviour
         else
         {
             GameObject CollitionWith = uiCollider.ChackCollider(CollitionType, gameObject.GetComponent<RectTransform>());
-            if (CollitionWith!=null)
-            {
-                CollitionWith.GetComponent<DropSlot>().UpdateSlot(dropObject, objectID);
-            }
+
 
             if (isStageCharacter)
             {
                 try
                 {
                     /*תנאי שאומר מספר דברים הראשון, תבדוק שקיים אובייקט בקוליידר בו התנגשנו אחר כך שסוג הדמות זו אותה דמות שאנחנו גוררים ולבסוף שהסלייד זה אותו סלייד ממנו לקחנו את האובייקט*/
-                    if (CollitionWith.GetComponent<DropSlot>().objectInSlot != null && CollitionWith.GetComponent<DropSlot>().objectInSlot.GetComponent<CharacterLogic>().ID == objectID && CollitionWith.transform.parent.parent.parent.Find("Collider").GetComponent<DropSlot>().SlotPlace == OriginalSlotId)
+                    print(" CollitionWith.transform.parent.parent.parent.Find().GetComponent<DropSlot>().SlotPlace" + CollitionWith.transform.parent.parent.parent.Find("Collider").GetComponent<DropSlot>().SlotPlace.ToString());
+                    if (CollitionWith.GetComponent<DropSlot>().objectInSlot != null && CollitionWith.GetComponent<DropSlot>().ObjectSlotID == objectID && CollitionWith.transform.parent.parent.parent.Find("Collider").GetComponent<DropSlot>().SlotPlace == OriginalSlotId)
                     {
                         GameObject objectInSlot = CollitionWith.GetComponent<DropSlot>().objectInSlot;
                         Color originalColor = objectInSlot.GetComponent<UnityEngine.UI.Image>().color;
                         objectInSlot.GetComponent<UnityEngine.UI.Image>().color = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
+                        Destroy(gameObject);
+                        return;
                     }
                     else
                     {
@@ -70,6 +70,11 @@ public class DragGeneral : MonoBehaviour
                     slideObject.GetComponent<BackgroundManager>().removeCharacter(characterInSlide);
                 }
 
+            }
+
+            if (CollitionWith != null)
+            {
+                CollitionWith.GetComponent<DropSlot>().UpdateSlot(dropObject, objectID);
             }
             Destroy(gameObject);
             

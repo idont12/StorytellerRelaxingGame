@@ -17,6 +17,5 @@ MonoBehaviour:
   objectID: 12
   newObject: 1
   dragObject: {fileID: 7881076238643088264, guid: 2508bd275c7fb384ca8bb091120919d5, type: 3}
-  dropObject: {fileID: 1532787914715187300, guid: 8f9194d6b961d9745a55dc3ff5713c1e, type: 3}
-  isStageCharacter: 0
+  dropObject: {fileID: 1532787914715187300, guid: 92882b9174f0b7e4099990a3441df913, type: 3}
   GrabSound: {fileID: 11400000, guid: f8651b77fbe1f7747970c4874a09c71b, type: 2}
