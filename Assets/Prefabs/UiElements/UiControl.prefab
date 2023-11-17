@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a889e65e7a76704885fd5f40289fac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backSceane: Menu
+  backSceane: LevelSelector
   SoundWindow: {fileID: 0}
 --- !u!1 &3667356968371793889
 GameObject:

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2322bbe5479d4448a033955c7955377, type: 3}
+  m_Name: C_DragItem- Alligator
+  m_EditorClassIdentifier: 
+  objectName: "\u05EA\u05E0\u05D9\u05DF"
+  objectType: 1
+  DragItemSprite: {fileID: 21300000, guid: 39b89ea328c2cad4abef27aedb17a4a3, type: 3}
+  objectID: 14
+  newObject: 0
+  dragObject: {fileID: 0}
+  dropObject: {fileID: 1532787914715187300, guid: b2ab8cd7a9c46df40b54b4db20c5ae04, type: 3}
+  GrabSound: {fileID: 0}

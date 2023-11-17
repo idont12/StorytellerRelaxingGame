@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Storyteller/ItemInfo", fileName = "ItemInfo")]
 public class ItemInfo : ScriptableObject
 {
-    
+    public string objectName;
     public ObjectType objectType;
     public Sprite DragItemSprite;
     public int objectID;

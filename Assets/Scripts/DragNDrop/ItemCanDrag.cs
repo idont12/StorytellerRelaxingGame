@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
@@ -9,18 +10,39 @@ using UnityEngine.UIElements;
 public class ItemCanDrag : MonoBehaviour, IPointerDownHandler
 {
     public ItemInfo ItemInfo;
-
+    public bool CanDrag = true;
     void UpdateByItemInfo(ItemInfo item)
     {
         objectType = item.objectType;
-        DragItemSprite = item.DragItemSprite;
-        objectID = item.objectID;
-        dragObject = item.dragObject;
-        dropObject = item.dropObject;
-        GrabSound = item.GrabSound;
+        if (item.DragItemSprite != null)
+        {
+            DragItemSprite = item.DragItemSprite;
+        }
+        if (item.objectID != 0)
+        {
+            objectID = item.objectID;
+        }
+        if (item.dragObject !=null)
+        {
+            dragObject = item.dragObject;
+        }
+        if (item.dropObject!=null)
+        {
+            dropObject = item.dropObject;
+        }
+        if (item.GrabSound != null)
+        {
+            GrabSound = item.GrabSound;
+        }
+        if (item.objectName!="" && NameDisplay!=null && isStageCharacter==false)
+        {
+            NameDisplay.text = item.objectName;
+        }
+       
     }
 
     //enum ObjectType { Background, Character }
+    [SerializeField] TMP_Text NameDisplay;
     [SerializeField] ObjectType objectType;
     [SerializeField] Sprite DragItemSprite;
     //[HideInInspector]
@@ -58,9 +80,13 @@ public class ItemCanDrag : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (isStageCharacter== false)
+        if (isStageCharacter== false && CanDrag)
         {
-            GrabSound.Raise();
+            if (GrabSound!=null)
+            {
+                GrabSound.Raise();
+            }
+            
             if (isStageCharacter)
             {
                 Color originalColor = gameObject.GetComponent<UnityEngine.UI.Image>().color;
@@ -111,9 +137,14 @@ public class ItemCanDrag : MonoBehaviour, IPointerDownHandler
         GameObject mouseCollid = uiCollider.ChackCollider("Mouse", gameObject.GetComponent<RectTransform>());
         isMouseOver = mouseCollid != null && isStageCharacter;
 
-        if (Input.GetMouseButtonDown(0) && isMouseOver)
+        if (Input.GetMouseButtonDown(0) && isMouseOver && CanDrag)
         {
             click();
+        }
+        
+        if (GameObject.Find("LevelManager").GetComponent<LevelManagerCode>().canPlay != CanDrag)
+        {
+            CanDrag = GameObject.Find("LevelManager").GetComponent<LevelManagerCode>().canPlay;
         }
     }
 

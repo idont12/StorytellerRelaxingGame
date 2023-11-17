@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d85a67b648ab18c45bb17d77400b816d, type: 3}
+  m_Script: {fileID: 11500000, guid: e2322bbe5479d4448a033955c7955377, type: 3}
   m_Name: C_DragItem- Hedgehog
   m_EditorClassIdentifier: 
+  objectName: "\u05E7\u05D9\u05E4\u05D5\u05D3"
   objectType: 1
-  DragItemSprite: {fileID: 21300000, guid: f97be4b1b02e61046bf526204f1e3ceb, type: 3}
+  DragItemSprite: {fileID: 21300000, guid: 0ac55f9f886d827408c102bdf33c5ff7, type: 3}
   objectID: 11
   newObject: 3
-  dragObject: {fileID: 7881076238643088264, guid: 2508bd275c7fb384ca8bb091120919d5, type: 3}
+  dragObject: {fileID: 0}
   dropObject: {fileID: 1532787914715187300, guid: c7172dbe218e70b4699162b19aebb243, type: 3}
-  GrabSound: {fileID: 11400000, guid: f8651b77fbe1f7747970c4874a09c71b, type: 2}
+  GrabSound: {fileID: 0}

@@ -5,9 +5,23 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using static CharacterStatus;
+using UnityEngine.SceneManagement;
 
 public class LevelManagerCode : MonoBehaviour
 {
+    [SerializeField] int LevelNum;
+
+    public bool canPlay = true;
+
+    public void GoToNextLevel()
+    {
+        SceneManager.LoadScene("Level"+(LevelNum+1).ToString());
+    }
+    public void GoToStart()
+    {
+        SceneManager.LoadScene("LevelSelector");
+    }
+
     [SerializeField] List<DropSlot> SliderOrder = new List<DropSlot>();
     [SerializeField] List<ItemCanDrag> allCharacters = new List<ItemCanDrag>();
 
@@ -17,7 +31,7 @@ public class LevelManagerCode : MonoBehaviour
     [SerializeField] List<Condition> conditions = new List<Condition>();
     [SerializeField] Animator IconFinalLevel;
     [SerializeField] GameEvent FinalLevelSound;
-
+    [SerializeField] GameObject PopNextLevel;
     //[SerializeField] ItemInfo ItemInfo;
     bool isFewFirstCh(string word, int characterNum, string eqealTo)
     {
@@ -228,6 +242,7 @@ public class LevelManagerCode : MonoBehaviour
                 //    }
                 //}
                 print("slide.backgroundManager.objectInSlotList.Count" + slide.backgroundManager.objectInSlotList.Count.ToString());
+                string ids = "";
                 for (int i =0; i< slide.backgroundManager.objectInSlotList.Count;i++)
                 {
                     print("EndStartLoop");
@@ -236,8 +251,10 @@ public class LevelManagerCode : MonoBehaviour
                     {
                         ChractersIDs.Add(thisObject.GetComponent<ItemCanDrag>().objectID);
                         ChractersObjects.Add(thisObject);
+                        ids += thisObject.GetComponent<ItemCanDrag>().objectID.ToString() + ", ";
                     }
                 }
+                print("all ids" + ids);
                 print("EndLoop");
                 foreach (Condition condition in Defult)
                 {
@@ -271,6 +288,7 @@ public class LevelManagerCode : MonoBehaviour
                     //Couse
                     if (condition.isSituation && ChackAllWhen)
                     {
+                        print("SituationRetuen" + condition.ChackSituation(BackgroundId, ChractersIDs).ToString());
                         ChackAllWhen = condition.ChackSituation(BackgroundId, ChractersIDs);
                     }
 
@@ -320,15 +338,24 @@ public class LevelManagerCode : MonoBehaviour
     public void FinishLevel()
     {
         print("FinishLevel");
+        canPlay = false;
+        PlayerPrefs.SetInt("Level" + LevelNum.ToString(),1);
         FinalLevelSound.Raise();
         if (IconFinalLevel!=null)
         {
             IconFinalLevel.SetBool("Solve", true);
         }
+        if (PopNextLevel!=null)
+        {
+            PopNextLevel.SetActive(true);
+            LeanTween.scale(PopNextLevel, new Vector3(1, 1, 1), 0.2f);
+        }
     }
+
     public void UnfinishLevel()
     {
         print("unfinishLevel");
+        canPlay = true;
         if (IconFinalLevel != null)
         {
             IconFinalLevel.SetBool("Solve", false);
@@ -391,8 +418,8 @@ public class LevelManagerCode : MonoBehaviour
                 for(int i=0;i< CharactersIDs.Count; i++)
                 {
                     int id = CharactersIDs[i];
-                    print("i"+i);
-                    print("get to secend if:" + (CharactersIDs.Contains(id) == false).ToString());
+                    print("id"+ id);
+                    print("get to secend if:" + (CharacterID.Contains(id)).ToString());
 
                     bool Contain = false;
                     if (useSpacificSlot)
@@ -401,10 +428,12 @@ public class LevelManagerCode : MonoBehaviour
                     }
                     else
                     {
-                        Contain = CharacterID.Contains(id) == false;
+                        print("not spacific");
+                        Contain = CharacterID.Contains(id);
                     }
-                    if (Contain)
+                    if (Contain == false)
                     {
+                        print("ReturnFalse");
                         return false;
                     }
 
@@ -537,7 +566,7 @@ public class LevelManagerCode : MonoBehaviour
                             allCharcters[characterPlaceInList].mySituations[releventStatePlace].isHappand = newStatus.isHappand;
                         }
                     }
-                    else if (newStatus.relationshipType == RelationshipType.NeedHelp || newStatus.relationshipType == RelationshipType.Scared)
+                    else if (newStatus.relationshipType == RelationshipType.NeedHelp || newStatus.relationshipType == RelationshipType.Scared || newStatus.relationshipType == RelationshipType.situation1 || newStatus.relationshipType == RelationshipType.situation2 || newStatus.relationshipType == RelationshipType.situation3)
                     {
                         int releventStatePlace = GetRelevantStatePlace(allCharcters[characterPlaceInList].mySituations, newStatus);
                         print("releventStatePlace2" + releventStatePlace.ToString());
@@ -580,7 +609,7 @@ public class ChangeAnimation
 [System.Serializable]
 public class CharacterStatus
 {
-    public enum RelationshipType { Friendship,NeedHelp, Scared };
+    public enum RelationshipType { Friendship,NeedHelp, Scared, situation1, situation2, situation3 };
     public RelationshipType relationshipType = new RelationshipType();
     public ObjectName mainObject;
     public ObjectName secondaryObject;
