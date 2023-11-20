@@ -1284,7 +1284,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9000081613252560238, guid: 53b7a24963bd0e64ca6e195b3e0b5708, type: 3}
       propertyPath: SliderOrder.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9000081613252560238, guid: 53b7a24963bd0e64ca6e195b3e0b5708, type: 3}
       propertyPath: SliderOrder.Array.data[0]

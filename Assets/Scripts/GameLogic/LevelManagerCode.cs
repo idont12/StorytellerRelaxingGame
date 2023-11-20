@@ -6,16 +6,23 @@ using UnityEditor;
 using UnityEngine;
 using static CharacterStatus;
 using UnityEngine.SceneManagement;
+using System;
 
 public class LevelManagerCode : MonoBehaviour
 {
+    [SerializeField] GameGeneralInfo generalInfo;
     [SerializeField] int LevelNum;
 
     public bool canPlay = true;
 
     public void GoToNextLevel()
     {
-        SceneManager.LoadScene("Level"+(LevelNum+1).ToString());
+        string nextLevelName =  generalInfo.getNextLevelbyName(SceneManager.GetActiveScene().name);
+        if (nextLevelName!=null && nextLevelName != "")
+        {
+            SceneManager.LoadScene(nextLevelName);
+        }
+       
     }
     public void GoToStart()
     {
@@ -40,46 +47,19 @@ public class LevelManagerCode : MonoBehaviour
 
     private void Start()
     {
+        int chackLevelNum = generalInfo.GetLevelInOrder(SceneManager.GetActiveScene().name);
+        if (chackLevelNum>-1)
+        {
+            LevelNum = chackLevelNum +1;
+        }
+        else
+        {
+            Console.Error.WriteLine("Cant find level in level order");
+        }
+        
         ItemInfo TestItem = ScriptableObject.CreateInstance<ItemInfo>();
         foreach (Condition condition in Defult)
         {
-            //if (condition.isSituation)
-            //{
-            //    foreach (ObjectName thisObject in condition.SituationElement)
-            //    {
-            //        int objectId = TestItem.ObjectToID(thisObject);
-            //        if (isFewFirstCh(thisObject.ToString(), 2, "Bg"))
-            //        {
-            //            if (condition.BackgroundsIDs.Contains(objectId) == false)
-            //            {
-            //                condition.BackgroundsIDs.Add(objectId);
-            //            }
-            //        }
-            //        else if (isFewFirstCh(thisObject.ToString(), 2, "Ch"))
-            //        {
-            //            if (condition.CharactersIDs.Contains(objectId) == false)
-            //            {
-            //                condition.CharactersIDs.Add(objectId);
-            //            }
-            //        }
-            //    }
-            //}
-            //if (condition.isCharacterStatus)
-            //{
-            //    foreach (CharacterStatus state in condition.conditionsStatus)
-            //    {
-            //        int MainID = TestItem.ObjectToID(state.mainObject);
-            //        if (state.mainCharacteID == 0)
-            //        {
-            //            state.mainCharacteID = MainID;
-            //        }
-            //        int SecenderyID = TestItem.ObjectToID(state.secondaryObject);
-            //        if (state.secondaryCharacterID == 0)
-            //        {
-            //            state.secondaryCharacterID = SecenderyID;
-            //        }
-            //    }
-            //}
             if (condition.willChangeAnimation)
             {
                 foreach (ChangeAnimation Animation in condition.ChangeAnimations)

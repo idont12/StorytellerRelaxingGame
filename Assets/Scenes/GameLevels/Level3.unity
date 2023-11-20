@@ -1287,7 +1287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7356314598962640248, guid: 8bea2f45c28891b4f96ce03096cbab89, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToStart
+      value: GoToNextLevel
       objectReference: {fileID: 0}
     - target: {fileID: 7356314598962640248, guid: 8bea2f45c28891b4f96ce03096cbab89, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

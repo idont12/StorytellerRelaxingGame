@@ -12,6 +12,7 @@ public class LevelSelectionItem : MonoBehaviour
     [SerializeField] UnityEngine.UI.Image LevelStatus;
     [SerializeField] Sprite FinishIcon;
     [SerializeField] Sprite UnfinishIcon;
+    [SerializeField] GameGeneralInfo Generalinfo;
     private void Start()
     {
         LevelName.text = "ωμα " + LevelNum.ToString();
@@ -25,7 +26,11 @@ public class LevelSelectionItem : MonoBehaviour
 
     public void GoToLevel()
     {
-        SceneManager.LoadScene("Level"+ LevelNum.ToString());
+        string levelName = Generalinfo.getLevelbyOrderNum(LevelNum-1);
+        if (levelName !=null && levelName != "")
+        {
+            SceneManager.LoadScene(levelName);
+        }
     }
 
 }
