@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DropSlot : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class DropSlot : MonoBehaviour
         levelManagerCode = GameObject.Find("LevelManager").GetComponent<LevelManagerCode>();
     }
 
-    public void UpdateSlot(GameObject newObject, int objectID)
+    public void UpdateSlot(GameObject newObject, int objectID, Sprite backSprite)
     {
         if (gameObject.tag == "CharacterSlotCollider")
         {
@@ -30,7 +31,7 @@ public class DropSlot : MonoBehaviour
         }
         else if (gameObject.tag == "SlideCollider")
         {
-            updateBackground(newObject, objectID);
+            updateBackground(newObject, objectID, backSprite);
         }
     }
 
@@ -103,7 +104,7 @@ public class DropSlot : MonoBehaviour
         levelManagerCode.ChackStory();
     }
 
-    void updateBackground(GameObject newObject, int objectID)
+    void updateBackground(GameObject newObject, int objectID,Sprite backSprite)
     {
         if (objectInSlot != null)
         {
@@ -116,6 +117,23 @@ public class DropSlot : MonoBehaviour
         objectInSlot.GetComponent<DragSlide>().slideDrop = this;
         objectInSlot.GetComponent<DragSlide>().objectID = objectID;
         ObjectSlotID = objectID;
+
+        if (backSprite != null)
+        {
+            print(backSprite.name);
+            objectInSlot.GetComponent<UnityEngine.UI.Image>().sprite = backSprite;
+        }
+
+        //print("ObjectSlotID.ToString()[0]" + ObjectSlotID.ToString()[0]);
+        //if (ObjectSlotID.ToString()[0] == '2')
+        //{
+        //    Sprite backSprite = GameObject.Find("LevelManager").GetComponent<LevelManagerCode>().generalInfo.getSpriteByID(ObjectSlotID);
+        //    if (backSprite != null)
+        //    {
+        //        objectInSlot.GetComponent<UnityEngine.UIElements.Image>().sprite = backSprite;
+        //    }
+
+        //}
     }
 
     public void SwitchSlide(GameObject SwitchObject, DropSlot OriginalPerent,bool willSwich,int objectID)

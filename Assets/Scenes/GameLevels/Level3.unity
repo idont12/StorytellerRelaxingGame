@@ -617,7 +617,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.79607844, g: 0.8980392, b: 0.83137256, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1253,6 +1253,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5366744602220508790, guid: 8bea2f45c28891b4f96ce03096cbab89, type: 3}
+      propertyPath: m_Spacing.x
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366744602220508790, guid: 8bea2f45c28891b4f96ce03096cbab89, type: 3}
+      propertyPath: m_Spacing.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5366744602220508790, guid: 8bea2f45c28891b4f96ce03096cbab89, type: 3}
+      propertyPath: m_ConstraintCount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6094366675597299271, guid: 8bea2f45c28891b4f96ce03096cbab89, type: 3}
       propertyPath: m_StartCorner
       value: 3
@@ -1263,7 +1275,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6699474594331448136, guid: 8bea2f45c28891b4f96ce03096cbab89, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 470.6
+      value: 245.66
       objectReference: {fileID: 0}
     - target: {fileID: 6741904003751015180, guid: 8bea2f45c28891b4f96ce03096cbab89, type: 3}
       propertyPath: m_RootOrder
@@ -1359,7 +1371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9028416981542443396, guid: 8bea2f45c28891b4f96ce03096cbab89, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 643.6684
+      value: 1600
       objectReference: {fileID: 0}
     - target: {fileID: 9028416981542443396, guid: 8bea2f45c28891b4f96ce03096cbab89, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1367,11 +1379,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9028416981542443396, guid: 8bea2f45c28891b4f96ce03096cbab89, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 889.8
+      value: -0.009994507
       objectReference: {fileID: 0}
     - target: {fileID: 9028416981542443396, guid: 8bea2f45c28891b4f96ce03096cbab89, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bea2f45c28891b4f96ce03096cbab89, type: 3}

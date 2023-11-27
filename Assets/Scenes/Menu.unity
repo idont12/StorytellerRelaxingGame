@@ -223,6 +223,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 534542715574976837, guid: b040f169004a2e644802f2f39af14878, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 534542715574976839, guid: b040f169004a2e644802f2f39af14878, type: 3}
       propertyPath: m_Name
       value: MenuCanvas
@@ -455,6 +459,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4313583115121757903, guid: b040f169004a2e644802f2f39af14878, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4540919700223959472, guid: b040f169004a2e644802f2f39af14878, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -529,8 +537,32 @@ PrefabInstance:
         \u05E0\u05D9\u05E1\u05D5\u05D9"
       objectReference: {fileID: 0}
     - target: {fileID: 7341352889682282639, guid: b040f169004a2e644802f2f39af14878, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8aa811cb0d4fffa4ca37428536129559, type: 2}
+    - target: {fileID: 7341352889682282639, guid: b040f169004a2e644802f2f39af14878, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7341352889682282639, guid: b040f169004a2e644802f2f39af14878, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7341352889682282639, guid: b040f169004a2e644802f2f39af14878, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7341352889682282639, guid: b040f169004a2e644802f2f39af14878, type: 3}
       propertyPath: m_isRightToLeft
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7341352889682282639, guid: b040f169004a2e644802f2f39af14878, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8974641472236889971, guid: 8aa811cb0d4fffa4ca37428536129559, type: 2}
+    - target: {fileID: 7341352889682282639, guid: b040f169004a2e644802f2f39af14878, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b040f169004a2e644802f2f39af14878, type: 3}
@@ -638,7 +670,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 1}
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

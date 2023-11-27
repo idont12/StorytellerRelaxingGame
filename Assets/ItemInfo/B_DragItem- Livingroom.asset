@@ -18,5 +18,6 @@ MonoBehaviour:
   objectID: 24
   newObject: 9
   dragObject: {fileID: 0}
-  dropObject: {fileID: 3099093254496806534, guid: 94c47e4c8a0dd8c499331980039e49d3, type: 3}
+  dropObject: {fileID: 3099093254496806534, guid: 997e27781f6606f418dc28cbc3fd88b9, type: 3}
   GrabSound: {fileID: 0}
+  backgroundSprite: {fileID: 0}

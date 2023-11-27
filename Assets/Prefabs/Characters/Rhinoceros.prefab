@@ -118,6 +118,7 @@ MonoBehaviour:
   slideObject: {fileID: 0}
   GrabSound: {fileID: 11400000, guid: f8651b77fbe1f7747970c4874a09c71b, type: 2}
   isMouseOver: 0
+  backgroundSprite: {fileID: 0}
 --- !u!114 &510983856426689183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,7 +174,7 @@ Animator:
   m_GameObject: {fileID: 1532787914715187300}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cbda94afbc7139c40a65993cd4249e31, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2fa086fe2ca066542917aac15522d313, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

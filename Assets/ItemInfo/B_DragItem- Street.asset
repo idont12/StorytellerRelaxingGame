@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2322bbe5479d4448a033955c7955377, type: 3}
   m_Name: B_DragItem- Street
   m_EditorClassIdentifier: 
-  objectName: "\u05E8\u05D7\u05D5\u05D1"
+  objectName: "\u05E9\u05DE\u05E9"
   objectType: 0
-  DragItemSprite: {fileID: 21300000, guid: 3120ec2beffde56499fe86f755fc25b9, type: 3}
+  DragItemSprite: {fileID: 21300000, guid: 747a80bf435564b4b963df4e2f386400, type: 3}
   objectID: 22
   newObject: 6
   dragObject: {fileID: 0}
-  dropObject: {fileID: 3099093254496806534, guid: d02047683af429149b8c6adff0c032d7, type: 3}
+  dropObject: {fileID: 3099093254496806534, guid: c15f46a6a5f3b8d4db7db0ebcd1ee510, type: 3}
   GrabSound: {fileID: 0}
+  backgroundSprite: {fileID: 21300000, guid: e93d77afa5fe4ba4789600bcde73a40c, type: 3}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: "\u05D2'\u05D9\u05E8\u05E4\u05D4"
   objectType: 1
-  DragItemSprite: {fileID: 21300000, guid: 70141d51621e24facbca9196bbde84b4, type: 3}
+  DragItemSprite: {fileID: 21300000, guid: 67574df231297d140966821d2284b1be, type: 3}
   objectID: 13
   newObject: 2
   dragObject: {fileID: 0}

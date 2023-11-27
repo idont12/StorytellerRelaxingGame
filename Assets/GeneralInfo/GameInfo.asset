@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: GameInfo
   m_EditorClassIdentifier: 
   LevelOrder:
-  - {fileID: 102900000, guid: 81fe87f73c554a4439ce73d3ff673935, type: 3}
-  - {fileID: 102900000, guid: ca535c94cf67c6a49b6878badaae381e, type: 3}
-  - {fileID: 102900000, guid: 2e941156fd1d46d4cb252a2ea810d43b, type: 3}
-  AfterFinalLevel: {fileID: 102900000, guid: 263728af09a2c094abfd7c6aa0ed9432, type: 3}
+  - Level1
+  - Level2
+  AfterFinalLevel: LevelSelector
+  backgroundManeger:
+  - thisObject: 6
+    thisSprite: {fileID: 21300000, guid: e93d77afa5fe4ba4789600bcde73a40c, type: 3}
+  - thisObject: 7
+    thisSprite: {fileID: 21300000, guid: 5a056c63223301f4c8faa42fe97cc1ed, type: 3}

@@ -10,7 +10,7 @@ using System;
 
 public class LevelManagerCode : MonoBehaviour
 {
-    [SerializeField] GameGeneralInfo generalInfo;
+    public GameGeneralInfo generalInfo;
     [SerializeField] int LevelNum;
 
     public bool canPlay = true;

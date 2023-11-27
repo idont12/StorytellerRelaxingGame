@@ -22,11 +22,11 @@ public class ItemCanDrag : MonoBehaviour, IPointerDownHandler
         {
             objectID = item.objectID;
         }
-        if (item.dragObject !=null)
+        if (item.dragObject != null)
         {
             dragObject = item.dragObject;
         }
-        if (item.dropObject!=null)
+        if (item.dropObject != null)
         {
             dropObject = item.dropObject;
         }
@@ -34,9 +34,13 @@ public class ItemCanDrag : MonoBehaviour, IPointerDownHandler
         {
             GrabSound = item.GrabSound;
         }
-        if (item.objectName!="" && NameDisplay!=null && isStageCharacter==false)
+        if (item.objectName != "" && NameDisplay != null && isStageCharacter == false)
         {
             NameDisplay.text = item.objectName;
+        }
+        if (item.backgroundSprite!=null && objectType==ObjectType.Background)
+        {
+            backgroundSprite = item.backgroundSprite;
         }
        
     }
@@ -57,6 +61,7 @@ public class ItemCanDrag : MonoBehaviour, IPointerDownHandler
     [SerializeField] GameEvent GrabSound;
 
     public bool isMouseOver = false;
+    [SerializeField] Sprite backgroundSprite;
 
     private void Start()
     {
@@ -97,6 +102,7 @@ public class ItemCanDrag : MonoBehaviour, IPointerDownHandler
             newDrag.GetComponent<DragGeneral>().dropObject = dropObject;
             newDrag.GetComponent<DragGeneral>().objectType = objectType.ToString();
             newDrag.GetComponent<DragGeneral>().objectID = objectID;
+            newDrag.GetComponent<DragGeneral>().backSprite = backgroundSprite;
             if (isStageCharacter)
             {
                 newDrag.GetComponent<DragGeneral>().isStageCharacter = isStageCharacter;
@@ -121,6 +127,7 @@ public class ItemCanDrag : MonoBehaviour, IPointerDownHandler
         newDrag.GetComponent<DragGeneral>().dropObject = dropObject;
         newDrag.GetComponent<DragGeneral>().objectType = objectType.ToString();
         newDrag.GetComponent<DragGeneral>().objectID = objectID;
+        newDrag.GetComponent<DragGeneral>().backSprite = backgroundSprite;
         if (isStageCharacter)
         {
             newDrag.GetComponent<DragGeneral>().isStageCharacter = isStageCharacter;

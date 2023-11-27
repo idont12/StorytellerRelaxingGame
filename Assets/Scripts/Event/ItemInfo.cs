@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [CreateAssetMenu(menuName = "Storyteller/ItemInfo", fileName = "ItemInfo")]
 public class ItemInfo : ScriptableObject
@@ -13,11 +14,12 @@ public class ItemInfo : ScriptableObject
     public GameObject dragObject;
     public GameObject dropObject;
     public GameEvent GrabSound;
-
+    public Sprite backgroundSprite;
     private void OnEnable()
     {
         objectID = ObjectToID(newObject);
     }
+
 
     public int ObjectToID(ObjectName objectName)
     {
@@ -88,5 +90,6 @@ public class ItemInfo : ScriptableObject
 
         return returnVale;
     }
+
 }
 public enum ObjectName { Ch_Alligator, Ch_Bear, Ch_Giraffe, Ch_Hedgehog, Ch_Panda, Ch_Rhinoceros , Bg_Street, Bg_Rain, Bg_TreePark, Bg_Livingroom, Bg_Music, Bg_LivingroomStorm, Bg_BedroomSingle, Bg_BedroomDouble, Bg_Holeway };

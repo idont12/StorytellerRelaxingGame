@@ -19,6 +19,7 @@ public class DragGeneral : MonoBehaviour
     public int characterInSlide;
     public GameObject slideObject;
     public int OriginalSlotId;
+    public Sprite backSprite;
 
     UiCollider uiCollider = new UiCollider();
     private void Start()
@@ -74,7 +75,7 @@ public class DragGeneral : MonoBehaviour
 
             if (CollitionWith != null)
             {
-                CollitionWith.GetComponent<DropSlot>().UpdateSlot(dropObject, objectID);
+                CollitionWith.GetComponent<DropSlot>().UpdateSlot(dropObject, objectID, backSprite);
             }
             Destroy(gameObject);
             
